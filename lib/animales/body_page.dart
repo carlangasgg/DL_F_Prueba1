@@ -16,14 +16,12 @@ class BodyPage extends StatelessWidget {
       right: 0,
       child: Stack(
         children: [
-          Container(
+          SizedBox(
             height: bodyHeight,
-            color: Colors.blue,
             child: Row(
               children: [
-                Container(
+                SizedBox(
                   width: generalInfoWidth,
-                  color: Colors.orange,
                   child: const AnimalInformation(),
                 ),
               ],

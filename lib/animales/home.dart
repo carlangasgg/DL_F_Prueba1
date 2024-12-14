@@ -8,9 +8,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.green.shade900,
-      body: const Padding(
+    return const Scaffold(
+      backgroundColor: Color(0xFF2a4849),
+      body: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: 16,
         ),
