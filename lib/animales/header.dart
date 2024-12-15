@@ -10,9 +10,27 @@ class Header extends StatelessWidget {
 
     return Align(
       alignment: Alignment.topCenter,
-      child: Container(
+      child: SizedBox(
         height: headerHeight,
-        color: Colors.red,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.menu_rounded,
+                color: Colors.white,
+              ),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.search,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

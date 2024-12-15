@@ -13,10 +13,9 @@ class SideBar extends StatelessWidget {
     return Positioned(
       top: size.height * .15,
       left: startAt,
-      child: Container(
+      child: SizedBox(
         height: bodyHeight,
         width: sidebarWidth,
-        color: Colors.grey,
       ),
     );
   }

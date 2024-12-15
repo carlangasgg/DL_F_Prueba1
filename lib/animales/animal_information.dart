@@ -8,6 +8,7 @@ class AnimalInformation extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     double animalWidth = size.width * .45;
+    double bodyBottom = size.height * .05;
 
     return Row(
       children: [
@@ -19,7 +20,7 @@ class AnimalInformation extends StatelessWidget {
               right: animalWidth * .1,
               bottom: 20,
             ),
-            child: animalHeader(),
+            child: animalHeader(bodyBottom),
           ),
         ),
       ],
@@ -27,11 +28,11 @@ class AnimalInformation extends StatelessWidget {
   }
 }
 
-Widget animalHeader() {
-  return const Column(
+Widget animalHeader(double bodyBottom) {
+  return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(
+      const Text(
         "Discover",
         textAlign: TextAlign.left,
         style: TextStyle(
@@ -40,7 +41,7 @@ Widget animalHeader() {
           fontSize: 24,
         ),
       ),
-      Text(
+      const Text(
         "Our Majestic world together",
         textAlign: TextAlign.left,
         style: TextStyle(
@@ -49,9 +50,12 @@ Widget animalHeader() {
           fontSize: 12,
         ),
       ),
-      Expanded(
+      const Expanded(
         child: AnimalBody(),
       ),
+      SizedBox(
+        height: bodyBottom,
+      )
     ],
   );
 }

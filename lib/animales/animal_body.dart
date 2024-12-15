@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:just_audio/just_audio.dart';
 import 'package:flutter/material.dart';
 
@@ -71,24 +69,22 @@ class _AnimalBodyState extends State<AnimalBody> {
                 Positioned(
                   bottom: 5,
                   right: 5,
-                  child: IconButton(
-                    onPressed: () async {
-                      try {
-                        // Stop any currently playing audio
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xFFE53A34),
+                    ),
+                    child: IconButton(
+                      onPressed: () async {
                         await player.stop();
 
-                        // Set the new audio and play it
-                        //await player.setAsset(mp3Animals[index]);
                         await player.setAsset(mp3Animals[index]);
                         await player.play();
-                      } catch (e) {
-                        // Handle errors gracefully
-                        log("Error playing audio: $e");
-                      }
-                    },
-                    icon: const Icon(
-                      Icons.play_arrow_rounded,
-                      color: Colors.white,
+                      },
+                      icon: const Icon(
+                        Icons.play_arrow_rounded,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
