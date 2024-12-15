@@ -8,13 +8,14 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color(0xFF2a4849),
+    Size size = MediaQuery.of(context).size;
+    return Scaffold(
+      backgroundColor: const Color(0xFF2a4849),
       body: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: 16,
+          horizontal: size.width * .1,
         ),
-        child: Stack(
+        child: const Stack(
           children: [
             Header(),
             BodyPage(),

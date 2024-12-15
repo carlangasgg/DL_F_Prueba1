@@ -1,12 +1,6 @@
 import 'package:just_audio/just_audio.dart';
 import 'package:flutter/material.dart';
-import 'package:prueba_1/descripciones/bird.dart';
-import 'package:prueba_1/descripciones/cat.dart';
-import 'package:prueba_1/descripciones/cow.dart';
-import 'package:prueba_1/descripciones/dog.dart';
-import 'package:prueba_1/descripciones/horse.dart';
-import 'package:prueba_1/descripciones/lion.dart';
-import 'package:prueba_1/descripciones/rooster.dart';
+import 'package:prueba_1/descripciones/animal.dart';
 
 class AnimalBody extends StatefulWidget {
   const AnimalBody({super.key});
@@ -51,13 +45,13 @@ class _AnimalBodyState extends State<AnimalBody> {
   ];
 
   final Map<String, WidgetBuilder> animalRoutes = {
-    'bird': (context) => const BirdPage(),
-    'cat': (context) => const CatPage(),
-    'cow': (context) => const CowPage(),
-    'dog': (context) => const DogPage(),
-    'horse': (context) => const HorsePage(),
-    'lion': (context) => const LionPage(),
-    'rooster': (context) => const RoosterPage(),
+    'bird': (context) => const Animal(type: 'bird'),
+    'cat': (context) => const Animal(type: 'cat'),
+    'cow': (context) => const Animal(type: 'cow'),
+    'dog': (context) => const Animal(type: 'dog'),
+    'horse': (context) => const Animal(type: 'horse'),
+    'lion': (context) => const Animal(type: 'lion'),
+    'rooster': (context) => const Animal(type: 'rooster'),
   };
   @override
   void initState() {
@@ -67,7 +61,7 @@ class _AnimalBodyState extends State<AnimalBody> {
 
   @override
   void dispose() {
-    player.dispose(); // Clean up the player when the widget is disposed
+    player.dispose();
     super.dispose();
   }
 
@@ -76,56 +70,16 @@ class _AnimalBodyState extends State<AnimalBody> {
     Size size = MediaQuery.of(context).size;
     double animalWidth = size.width * .45;
     return ListView.separated(
-      padding: const EdgeInsets.only(top: 25.0), // padding around the grid
-      itemCount: imgAnimals.length, // total number of items
+      padding: const EdgeInsets.only(top: 25.0),
+      itemCount: imgAnimals.length,
       itemBuilder: (context, index) {
         return Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Stack(
               children: [
-                GestureDetector(
-                  onTap: () {
-                    final routeBuilder = animalRoutes[animals[index]];
-                    if (routeBuilder != null) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: routeBuilder),
-                      );
-                    }
-                  },
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: Image.asset(
-                      imgAnimals[index],
-                      width: animalWidth,
-                      height: animalWidth,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: 5,
-                  right: 5,
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color(0xFFE53A34),
-                    ),
-                    child: IconButton(
-                      onPressed: () async {
-                        await player.stop();
-
-                        await player.setAsset(mp3Animals[index]);
-                        await player.play();
-                      },
-                      icon: const Icon(
-                        Icons.play_arrow_rounded,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
+                imageRender(index, animalWidth),
+                playAnimal(index),
               ],
             ),
           ],
@@ -133,6 +87,54 @@ class _AnimalBodyState extends State<AnimalBody> {
       },
       separatorBuilder: (BuildContext context, int index) =>
           const Divider(color: Color(0xFF2a4849)),
+    );
+  }
+
+  Widget imageRender(int index, double size) {
+    return GestureDetector(
+      onTap: () {
+        final routeBuilder = animalRoutes[animals[index]];
+        if (routeBuilder != null) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: routeBuilder),
+          );
+        }
+      },
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(15),
+        child: Image.asset(
+          imgAnimals[index],
+          width: size,
+          height: size,
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+
+  Widget playAnimal(int index) {
+    return Positioned(
+      bottom: 5,
+      right: 5,
+      child: Container(
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          color: Color(0xFFE53A34),
+        ),
+        child: IconButton(
+          onPressed: () async {
+            await player.stop();
+
+            await player.setAsset(mp3Animals[index]);
+            await player.play();
+          },
+          icon: const Icon(
+            Icons.play_arrow_rounded,
+            color: Colors.white,
+          ),
+        ),
+      ),
     );
   }
 }
