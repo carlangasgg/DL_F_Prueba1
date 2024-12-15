@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:prueba_1/animales/body_page.dart';
 import 'package:prueba_1/animales/header.dart';
-import 'package:prueba_1/animales/side_bar.dart';
+//import 'package:prueba_1/animales/side_bar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
           children: [
             Header(),
             BodyPage(),
-            SideBar(),
+            //SideBar(),
           ],
         ),
       ),

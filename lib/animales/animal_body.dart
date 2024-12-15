@@ -1,5 +1,12 @@
 import 'package:just_audio/just_audio.dart';
 import 'package:flutter/material.dart';
+import 'package:prueba_1/descripciones/bird.dart';
+import 'package:prueba_1/descripciones/cat.dart';
+import 'package:prueba_1/descripciones/cow.dart';
+import 'package:prueba_1/descripciones/dog.dart';
+import 'package:prueba_1/descripciones/horse.dart';
+import 'package:prueba_1/descripciones/lion.dart';
+import 'package:prueba_1/descripciones/rooster.dart';
 
 class AnimalBody extends StatefulWidget {
   const AnimalBody({super.key});
@@ -32,6 +39,26 @@ class _AnimalBodyState extends State<AnimalBody> {
     "assets/mp3/lion.mp3",
     "assets/mp3/rooster.mp3",
   ];
+
+  List<String> animals = [
+    'bird',
+    'cat',
+    'cow',
+    'dog',
+    'horse',
+    'lion',
+    'rooster',
+  ];
+
+  final Map<String, WidgetBuilder> animalRoutes = {
+    'bird': (context) => const BirdPage(),
+    'cat': (context) => const CatPage(),
+    'cow': (context) => const CowPage(),
+    'dog': (context) => const DogPage(),
+    'horse': (context) => const HorsePage(),
+    'lion': (context) => const LionPage(),
+    'rooster': (context) => const RoosterPage(),
+  };
   @override
   void initState() {
     super.initState();
@@ -57,13 +84,24 @@ class _AnimalBodyState extends State<AnimalBody> {
           children: [
             Stack(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-                  child: Image.asset(
-                    imgAnimals[index],
-                    width: animalWidth,
-                    height: animalWidth,
-                    fit: BoxFit.cover,
+                GestureDetector(
+                  onTap: () {
+                    final routeBuilder = animalRoutes[animals[index]];
+                    if (routeBuilder != null) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: routeBuilder),
+                      );
+                    }
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Image.asset(
+                      imgAnimals[index],
+                      width: animalWidth,
+                      height: animalWidth,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 Positioned(
